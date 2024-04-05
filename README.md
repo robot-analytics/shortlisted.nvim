@@ -42,9 +42,9 @@ tmux windows, or dream up your own custom action and execute with a single key
 ```lua
 use "nvim-lua/plenary.nvim" -- don't forget to add this one if you don't have it yet!
 use {
-    "robot-analytics/shortlisted.nvim",
-    branch = "main",
-    requires = { {"nvim-lua/plenary.nvim"} }
+  "robot-analytics/shortlisted.nvim",
+  branch = "main",
+  requires = { {"nvim-lua/plenary.nvim"} }
 }
 ```
 
@@ -52,9 +52,9 @@ use {
 
 ```lua
 {
-    "robot-analytics/shortlisted.nvim",
-    branch = "main",
-    dependencies = { "nvim-lua/plenary.nvim" }
+  "robot-analytics/shortlisted.nvim",
+  branch = "main",
+  dependencies = { "nvim-lua/plenary.nvim" }
 }
 ```
 
