@@ -1,7 +1,7 @@
 <div align="center">
 
-# Harpoon
-##### Getting you where you want with the fewest keystrokes.
+# Shortlisted.nvim
+##### Getting you where you want with the fewest keystrokes
 
 [![Lua](https://img.shields.io/badge/Lua-blue.svg?style=for-the-badge&logo=lua)](http://www.lua.org)
 [![Neovim](https://img.shields.io/badge/Neovim%200.8+-green.svg?style=for-the-badge&logo=neovim)](https://neovim.io)
@@ -10,18 +10,20 @@
 </div>
 
 ## ⇁ TOC
-* [The Problems](#-The-Problems)
-* [The Solutions](#-The-Solutions)
-* [Installation](#-Installation)
-* [Getting Started](#-Getting-Started)
-* [API](#-API)
-    * [Config](#config)
-    * [Settings](#settings)
-* [Contribution](#-Contribution)
-* [Social](#-Social)
-* [Note to legacy Harpoon 1 users](#-Note-to-legacy-Harpoon-1-users)
+
+* [The Problems](#-the-problems)
+* [The Solutions](#-the-solutions)
+* [Installation](#-installation)
+* [Getting Started](#-getting-started)
+* [API](#-api)
+  * [Config](#config)
+  * [Settings](#settings)
+* [Contribution](#-contribution)
+* [Social](#-social)
+* [Note to legacy Harpoon 1 users](#-note-to-legacy-harpoon-1-users)
 
 ## ⇁ The Problems
+
 1. You're working on a codebase. medium, large, tiny, whatever. You find
 yourself frequenting a small set of files and you are tired of using a fuzzy finder,
 `:bnext` & `:bprev` are getting too repetitive, alternate file doesn't quite cut it, etc etc.
@@ -30,12 +32,15 @@ persistent terminals that can be easily navigated to, send commands to other
 tmux windows, or dream up your own custom action and execute with a single key
 
 ## ⇁ The Solutions
+
 1. Specify either by altering a ui or by adding via hot key files
 1. Unlimited lists and items within the lists
 
 ## ⇁ Installation
+
 * neovim 0.8.0+ required
 * install using your favorite plugin manager (i am using `packer` in this case)
+
 ```lua
 use "nvim-lua/plenary.nvim" -- don't forget to add this one if you don't have it yet!
 use {
@@ -44,7 +49,9 @@ use {
     requires = { {"nvim-lua/plenary.nvim"} }
 }
 ```
+
 * install using [lazy.nvim](https://github.com/folke/lazy.nvim)
+
 ```lua
 {
     "ThePrimeagen/harpoon",
@@ -183,6 +190,7 @@ There is quite a bit of behavior you can configure via `harpoon:setup()`
 * `[name] = HarpoonPartialConfigItem`: any named lists config.  it will be merged with `default` and override any behavior
 
 **HarpoonPartialConfigItem Definition**
+
 ```
 ---@class HarpoonPartialConfigItem
 ---@field select_with_nil? boolean defaults to false
@@ -198,6 +206,7 @@ There is quite a bit of behavior you can configure via `harpoon:setup()`
 ```
 
 **Detailed Definitions**
+
 * `select_with_nil`: allows for a list to call select even if the provided item is nil
 * `encode`: how to encode the list item to the harpoon file.  if encode is `false`, then the list will not be saved to disk (think terminals)
 * `decode`: how to decode the list
@@ -213,6 +222,7 @@ There is quite a bit of behavior you can configure via `harpoon:setup()`
 Settings can alter the experience of harpoon
 
 **Definition**
+
 ```lua
 ---@class HarpoonSettings
 ---@field save_on_toggle boolean defaults to false
@@ -222,11 +232,13 @@ Settings can alter the experience of harpoon
 ```
 
 **Descriptions**
+
 * `save_on_toggle`: any time the ui menu is closed then we will save the state back to the backing list, not to the fs
 * `sync_on_ui_close`: any time the ui menu is closed then the state of the list will be sync'd back to the fs
 * `key` how the out list key is looked up.  This can be useful when using worktrees and using git remote instead of file path
 
 **Defaults**
+
 ```lua
 settings = {
     save_on_toggle = false,
@@ -288,10 +300,11 @@ very conservative on what I take.  I don't want Harpoon _solving_ specific
 issues, I want it to create the proper hooks to solve any problem
 
 **Running Tests**
-To run the tests make sure [plenary](https://github.com/nvim-lua/plenary.nvim) is checked out in the parent directory of *this* repository, then run `make test`.
+To run the tests make sure [plenary](https://github.com/nvim-lua/plenary.nvim) is checked out in the parent directory of _this_ repository, then run `make test`.
 
 ## ⇁ Social
 For questions about Harpoon, there's a #harpoon channel on [the Primeagen's Discord](https://discord.gg/theprimeagen) server.
+
 * [Discord](https://discord.gg/theprimeagen)
 * [Twitch](https://www.twitch.tv/theprimeagen)
 * [Twitter](https://twitter.com/ThePrimeagen)
