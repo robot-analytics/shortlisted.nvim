@@ -19,7 +19,6 @@
   * [Config](#config)
   * [Settings](#settings)
 * [Contribution](#-contribution)
-* [Note to legacy Harpoon 1 users](#-note-to-legacy-harpoon-1-users)
 
 ## ⇁ The Problems
 
@@ -299,8 +298,6 @@ issues, I want it to create the proper hooks to solve any problem
 **Running Tests**
 To run the tests make sure [plenary](https://github.com/nvim-lua/plenary.nvim) is checked out in the parent directory of _this_ repository, then run `make test`.
 
-## ⇁ Note to legacy Harpoon 1 users
-Original Harpoon will remain in a frozen state and i will merge PRs in with _no
-code review_ for those that wish to remain on that.  Harpoon 2 is significantly
-better and allows for MUCH greater control.  Please migrate to that (will
-become `master` within the next few months).
+## License
+
+Shortlisted.nvim is licensed under [GNU General Public License v3.0](LICENSE).
