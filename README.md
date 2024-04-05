@@ -269,4 +269,9 @@ vim.cmd('highlight! TabLineFill guibg=NONE guifg=white')
 ```
 
 Result:
+
 ![tabline](https://i.imgur.com/8i8mKJD.png)
+
+## License
+
+Shortlisted.nvim is licensed under [GNU General Public License v3.0](LICENSE).
