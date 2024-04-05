@@ -19,7 +19,6 @@
   * [Config](#config)
   * [Settings](#settings)
 * [Contribution](#-contribution)
-* [Social](#-social)
 * [Note to legacy Harpoon 1 users](#-note-to-legacy-harpoon-1-users)
 
 ## ⇁ The Problems
@@ -44,8 +43,8 @@ tmux windows, or dream up your own custom action and execute with a single key
 ```lua
 use "nvim-lua/plenary.nvim" -- don't forget to add this one if you don't have it yet!
 use {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
+    "robot-analytics/shortlisted.nvim",
+    branch = "main",
     requires = { {"nvim-lua/plenary.nvim"} }
 }
 ```
@@ -54,8 +53,8 @@ use {
 
 ```lua
 {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
+    "robot-analytics/shortlisted.nvim",
+    branch = "main",
     dependencies = { "nvim-lua/plenary.nvim" }
 }
 ```
@@ -106,19 +105,19 @@ harpoon:setup({})
 -- basic telescope configuration
 local conf = require("telescope.config").values
 local function toggle_telescope(harpoon_files)
-    local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-    end
+  local file_paths = {}
+  for _, item in ipairs(harpoon_files.items) do
+    table.insert(file_paths, item.value)
+  end
 
-    require("telescope.pickers").new({}, {
-        prompt_title = "Harpoon",
-        finder = require("telescope.finders").new_table({
-            results = file_paths,
-        }),
-        previewer = conf.file_previewer({}),
-        sorter = conf.generic_sorter({}),
-    }):find()
+  require("telescope.pickers").new({}, {
+    prompt_title = "Harpoon",
+    finder = require("telescope.finders").new_table({
+        results = file_paths,
+    }),
+    previewer = conf.file_previewer({}),
+    sorter = conf.generic_sorter({}),
+  }):find()
 end
 
 vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
@@ -141,43 +140,41 @@ easy to create.
 local harpoon = require("harpoon")
 
 harpoon:setup({
-    -- Setting up custom behavior for a list named "cmd"
-    "cmd" = {
+  -- Setting up custom behavior for a list named "cmd"
+  "cmd" = {
+    -- When you call list:add() this function is called and the return
+    -- value will be put in the list at the end.
+    --
+    -- which means same behavior for prepend except where in the list the
+    -- return value is added
+    --
+    -- @param possible_value string only passed in when you alter the ui manual
+    add = function(possible_value)
+      -- get the current line idx
+      local idx = vim.fn.line(".")
 
-        -- When you call list:add() this function is called and the return
-        -- value will be put in the list at the end.
-        --
-        -- which means same behavior for prepend except where in the list the
-        -- return value is added
-        --
-        -- @param possible_value string only passed in when you alter the ui manual
-        add = function(possible_value)
-            -- get the current line idx
-            local idx = vim.fn.line(".")
+      -- read the current line
+      local cmd = vim.api.nvim_buf_get_lines(0, idx - 1, idx, false)[1]
+      if cmd == nil then
+        return nil
+      end
 
-            -- read the current line
-            local cmd = vim.api.nvim_buf_get_lines(0, idx - 1, idx, false)[1]
-            if cmd == nil then
-                return nil
-            end
+      return {
+        value = cmd,
+        context = { ... any data you want ... },
+      }
+    end,
 
-            return {
-                value = cmd,
-                context = { ... any data you want ... },
-            }
-        end,
-
-        --- This function gets invoked with the options being passed in from
-        --- list:select(index, <...options...>)
-        --- @param list_item {value: any, context: any}
-        --- @param list { ... }
-        --- @param option any
-        select = function(list_item, list, option)
-            -- WOAH, IS THIS HTMX LEVEL XSS ATTACK??
-            vim.cmd(list_item.value)
-        end
-
-    }
+    --- This function gets invoked with the options being passed in from
+    --- list:select(index, <...options...>)
+    --- @param list_item {value: any, context: any}
+    --- @param list { ... }
+    --- @param option any
+    select = function(list_item, list, option)
+      -- WOAH, IS THIS HTMX LEVEL XSS ATTACK??
+      vim.cmd(list_item.value)
+    end
+  }
 })
 
 ```
@@ -241,11 +238,11 @@ Settings can alter the experience of harpoon
 
 ```lua
 settings = {
-    save_on_toggle = false,
-    sync_on_ui_close = false,
-    key = function()
-        return vim.loop.cwd()
-    end,
+  save_on_toggle = false,
+  sync_on_ui_close = false,
+  key = function()
+    return vim.loop.cwd()
+  end,
 },
 ```
 
@@ -301,13 +298,6 @@ issues, I want it to create the proper hooks to solve any problem
 
 **Running Tests**
 To run the tests make sure [plenary](https://github.com/nvim-lua/plenary.nvim) is checked out in the parent directory of _this_ repository, then run `make test`.
-
-## ⇁ Social
-For questions about Harpoon, there's a #harpoon channel on [the Primeagen's Discord](https://discord.gg/theprimeagen) server.
-
-* [Discord](https://discord.gg/theprimeagen)
-* [Twitch](https://www.twitch.tv/theprimeagen)
-* [Twitter](https://twitter.com/ThePrimeagen)
 
 ## ⇁ Note to legacy Harpoon 1 users
 Original Harpoon will remain in a frozen state and i will merge PRs in with _no
